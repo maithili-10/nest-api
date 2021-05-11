@@ -8,11 +8,12 @@ export class OrderDetailsController {
   constructor(private readonly orderDetailsService: OrderDetailsService) {}
 
   @Post()
-  create( @Body() createorderdetailsDto: CreateOrderDetailDto) {
-    return this.orderDetailsService.create(createorderdetailsDto);
+  create(@Request() req:any,@Body() createorderdetailsDto: CreateOrderDetailDto) {
+    return this.orderDetailsService.create(req.orderId,req.productId,createorderdetailsDto);
   }
-  findAll() {
-    return this.orderDetailsService.findAll();
+  @Get()
+  findAll(@Request() req:any) {
+    return this.orderDetailsService.findAll(req.body.orderId,req.body.productId);
   }
 
   @Get(':id')
@@ -30,11 +31,3 @@ export class OrderDetailsController {
     return this.orderDetailsService.remove(+id);
   }
 }
-function uid(uid: any, productId: any, createOrderDetailDto: CreateOrderDetailDto) {
-  throw new Error('Function not implemented.');
-}
-
-function productId(uid: (uid: any, productId: any, createOrderDetailDto: CreateOrderDetailDto) => void, productId: any, createOrderDetailDto: CreateOrderDetailDto) {
-  throw new Error('Function not implemented.');
-}
-

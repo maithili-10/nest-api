@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserService } from 'src/auth/user/user.service';
+//import { UserService } from 'src/auth/user/user.service';
 import { OrderService } from 'src/order/order.service';
+import { ProductService } from 'src/product/product.service';
 import { Repository } from 'typeorm';
 import { CreateOrderDetailDto } from './dto/create-order-detail.dto';
 import { UpdateOrderDetailDto } from './dto/update-order-detail.dto';
@@ -9,22 +10,19 @@ import { OrderDetails } from './entities/order-detail.entity';
 
 @Injectable()
 export class OrderDetailsService {
- 
+  orderRepository: any;
   constructor(
     @InjectRepository(OrderDetails) private orderdetailsRepository: Repository<OrderDetails>,
+    private orderService:OrderService,private productService:ProductService,
+    
    
   ) {}
-  async create(createOrderDetailsDto: CreateOrderDetailDto) {
-   
-    
-
+  async create(orderId:number,productId:number,createOrderDetailsDto: CreateOrderDetailDto) {
     return this.orderdetailsRepository.save({
      orderAmount:createOrderDetailsDto.Amount,
      orderQty:createOrderDetailsDto.qty,
     
-
-    
-      createdAt: new Date().toISOString(),
+  
     });
   }
 
@@ -35,8 +33,13 @@ export class OrderDetailsService {
 
   
 
-  findAll() {
-    return this.orderdetailsRepository.find();
+  async findAll(orderId: number,productId:number) {
+    const data = await this.orderdetailsRepository.find({
+      where: { orderId: orderId,productId:productId }
+    });
+    if (data.length == 0)
+      throw new NotFoundException();
+    return data;
   }
 
   findOne(id: number) {
