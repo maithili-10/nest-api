@@ -15,7 +15,7 @@ constructor(
     @InjectRepository(Order) private orderRepository: Repository<Order>,
     private userService: UserService,
   ) {}
- async create(uid: string,createOrderDto: CreateOrderDto) {
+ async create(createOrderDto: CreateOrderDto,uid:string) {
   const user = await this.userService.findById(uid);
   
     return this.orderRepository.save({
@@ -24,6 +24,7 @@ constructor(
       orderStatus:createOrderDto.status,
       orderDate:createOrderDto.odate,
       shippingDate:createOrderDto.sdate,
+      products: createOrderDto.products,
       user:user
 
     
@@ -34,7 +35,7 @@ constructor(
   }
 
   findAll() {
-    return this.orderRepository.find();
+    return this.orderRepository.find({ relations: ["user", "address"] });
   }
 
  async findOne(id: number) {
@@ -45,8 +46,16 @@ constructor(
   }
 
   update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
-  }
+    return this.orderRepository.update(
+        { orderId: id },
+        {
+          orderAmount:updateOrderDto.amount,
+          orderStatus:updateOrderDto.status,
+          orderDate:updateOrderDto.odate,
+          shippedDate:updateOrderDto.sdate,
+        }
+    );
+}
 
   remove(id: number) {
     return this.orderRepository.delete(id);

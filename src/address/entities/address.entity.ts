@@ -13,6 +13,15 @@ export class Address {
   id: number;
 
   @Column()
+  firstName: string;
+
+  @Column()
+    lastName: string;
+
+  @Column({ width: 12 })
+    phoneNo: string;
+
+  @Column()
   line1: string;
 
   @Column()

@@ -29,25 +29,16 @@ export class PaymentService {
       paymentDate:createPaymentDto.pdate,
       user:user,
      
-     
-      
-      
-      
-      
-      
-
-     
-     
-     
-    });
+});
   }
 
-
+  async findAll(userId:string) {
+    const user=await this.userService.findById(userId)
+    return this.paymentRepository.find({where:{userId:user}});
+  }
  
 
-  findAll() {
-    return this.paymentRepository.find();
-  }
+ 
 
   findOne(id: number) {
     return `This action returns a #${id} payment`;

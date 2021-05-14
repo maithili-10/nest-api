@@ -10,7 +10,6 @@ import { OrderModule } from './order/order.module';
 import { PaymentModule } from './payment/payment.module';
 import { OrderDetailsModule } from './order-details/order-details.module';
 
-
 @Module({
   imports: [
     // register the modules : features
@@ -23,9 +22,6 @@ import { OrderDetailsModule } from './order-details/order-details.module';
     PaymentModule,
    
     OrderDetailsModule,
-   
-   
-    
   ],
   controllers: [
     // register the controller

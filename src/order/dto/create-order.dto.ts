@@ -18,5 +18,6 @@ export class CreateOrderDto {
   @ApiProperty()
   user:string;
 
-  
+  @ApiProperty()
+   products: string[];
 }
