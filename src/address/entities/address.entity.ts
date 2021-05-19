@@ -12,14 +12,7 @@ export class Address {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  firstName: string;
-
-  @Column()
-    lastName: string;
-
-  @Column({ width: 12 })
-    phoneNo: string;
+  
 
   @Column()
   line1: string;
@@ -33,7 +26,7 @@ export class Address {
   @Column()
   state: string;
 
-  @Column({ type: 'integer' })
+  @Column({precision:6})
   pincode: number;
 
   @Column({ type: 'datetime' })

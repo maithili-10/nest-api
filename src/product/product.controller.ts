@@ -32,8 +32,76 @@ export class ProductController {
   }
 
   @Get()
-  findAll(@Query('page') page: number = 1, @Query('size') size: number = 20) {
-    return this.productService.findAll(page, size);
+  findAll(@Query('page') page: number = 1,
+   @Query('size') size: number = 20,
+   @Query("minPrice") minPrice=1,
+   @Query("maxPrice") maxPrice=5000,
+   @Query("sortName") sortName: string,
+   @Query("sortPrice") sortPrice: string,
+   @Query("searchData") searchData: string
+    ) {
+    //   if (sortName == "productSalePrice" && sortPrice == "DESC") {
+    //     return this.productService.findAllproddesc(
+    //         page,
+    //         size,
+    //         minPrice,
+    //         maxPrice,
+    //         sortName,
+    //         sortPrice,
+    //         searchData,
+    //     );
+    // }
+    if (sortName == "productSalePrice" && sortPrice == "ASC") {
+        return this.productService.findAllprodasc(
+            page,
+            size,
+            minPrice,
+            maxPrice,
+            searchData,
+            sortName,
+            sortPrice
+        );
+    }
+
+    if (sortName == "productName" && sortPrice == "ASC") {
+        return this.productService.findAllnameasc(
+            page,
+            size,
+            minPrice,
+            maxPrice,
+            searchData,
+            sortName,
+            sortPrice
+        );
+    }
+    if (sortName == "productName" && sortPrice == "DESC") {
+        return this.productService.findAllnamedesc(
+            page,
+            size,
+            minPrice,
+            maxPrice,
+            searchData,
+            sortName,
+            sortPrice
+        );
+    }
+    return this.productService.findAll(
+        page,
+        size,
+        minPrice,
+        maxPrice,
+        sortName,
+        sortPrice,
+        searchData
+    );
+
+
+
+
+
+
+
+   
   }
 
   @Get('search')
@@ -56,5 +124,5 @@ export class ProductController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productService.remove(+id);
-  }
+  } 
 }

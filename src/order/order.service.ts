@@ -33,6 +33,14 @@ constructor(
      
     });
   }
+   findById(id:string){
+    return this.orderRepository.find({
+      where:{user:id},
+      relations: ["user"]
+
+    });
+  }
+
 
   findAll() {
     return this.orderRepository.find({ relations: ["user", "address"] });
@@ -61,3 +69,4 @@ constructor(
     return this.orderRepository.delete(id);
   }
 }
+

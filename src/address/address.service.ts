@@ -16,11 +16,9 @@ export class AddressService {
     async create(uid: string, createAddressDto: CreateAddressDto) {
         const user = await this.userService.findById(uid);
         const {
-            city, line1, line2,pincode, state, firstName, lastName, phoneNo, } = createAddressDto;
+            city, line1, line2,pincode, state } = createAddressDto;
         return this.addressRepository.save({
-            firstName,
-            lastName,
-            phoneNo,
+           
             city,
             line1,
             line2,

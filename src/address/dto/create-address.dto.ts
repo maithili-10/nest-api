@@ -4,35 +4,29 @@ import { IsNotEmpty, IsNumber } from 'class-validator';
 export class CreateAddressDto {
 
 
-  @ApiProperty()
-  @IsNotEmpty()
-  firstName: string;
+  
 
-  @ApiProperty()
-  @IsNotEmpty()
-  lastName: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  phoneNo: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({nullable:true})
+ 
   line1: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({nullable:true})
+ 
   line2: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({nullable:true})
+  
   city: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({nullable:true})
+ 
   state: string;
 
   @ApiProperty()
-  @IsNumber()
+  
   pincode?: number;
+
+  @ApiProperty()
+
+  userId:string;
 }
