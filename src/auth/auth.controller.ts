@@ -6,6 +6,7 @@ import {
   Post,
   UseGuards,
   Request,
+  UploadedFile,
 } from "@nestjs/common";
 import {
   ApiTags,
@@ -13,6 +14,7 @@ import {
   ApiBadRequestResponse,
   ApiOkResponse,
 } from "@nestjs/swagger";
+import { observable } from "rxjs";
 import { AuthService } from "./auth.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { LoginDto } from "./dto/login.dto";
@@ -53,3 +55,4 @@ export class AuthController {
       return this.userService.findById(req.user.userId);
   }
 }
+

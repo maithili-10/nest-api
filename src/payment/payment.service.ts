@@ -18,15 +18,19 @@ export class PaymentService {
     
   ) {}
 
-  async create(uid:string, createPaymentDto: CreatePaymentDto) {
+  async create(createPaymentDto: CreatePaymentDto,uid:string) {
     const user = await this.userService.findById(uid);
     
-    
+    let [data, count] = await this.paymentRepository.findAndCount();
+    console.log(data);
+    console.log(count);
     return this.paymentRepository.save({
 
-      paymentStatus:createPaymentDto.pstatus,
+     
       paymentAmount:createPaymentDto.pamount,
-      paymentDate:createPaymentDto.pdate,
+      paymentMethod: createPaymentDto.pMethod,
+      paymentType: createPaymentDto.pType,
+      orderId: count + 1,
       user:user,
      
 });
@@ -41,8 +45,8 @@ export class PaymentService {
  
 
   findOne(id: number) {
-    return `This action returns a #${id} payment`;
-  }
+    return this.paymentRepository.findOne(id);
+}
 
   update(id: number, updatePaymentDto: UpdatePaymentDto) {
     return `This action updates a #${id} payment`;

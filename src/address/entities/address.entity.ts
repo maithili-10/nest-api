@@ -12,6 +12,14 @@ export class Address {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ nullable: true })
+    firstName: string;
+
+    @Column({ nullable: true })
+    lastName: string;
+
+    @Column({ width: 12, nullable: true })
+    mobileNo: string;
   
 
   @Column()

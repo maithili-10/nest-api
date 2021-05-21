@@ -22,7 +22,6 @@ export class Product {
   @Column({ default: 10 })
   productStock: number;
 
-  @OneToMany(()=>Payment,(payment)=>payment.product)
-  payment:Payment[]
+ 
 
 }

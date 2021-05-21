@@ -7,7 +7,7 @@ export class CreateOrderDto {
   amount: number;
 
   @ApiProperty()
-  status: string;
+  status?: string;
 
   @ApiProperty({ required: false })
   odate?: Date;

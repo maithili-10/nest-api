@@ -10,28 +10,22 @@ export class Payment{
     @PrimaryGeneratedColumn()
     paymentId:number;
 
-    @Column({default:'pending'})
-    paymentStatus:string;
-
     @Column({ type: 'datetime',nullable:true,default: ()=>'CURRENT_TIMESTAMP' })
     paymentDate:Date;
     
     @Column({default:10})
     paymentAmount:number;
 
-    @ManyToOne(()=>Product,(product)=>product.productId)
-    @JoinColumn({name:'productId'})
-    product:Product
-
     @ManyToOne(()=>UserEntity,(user)=>user.userId)
     @JoinColumn({name:'userId'})
     user:UserEntity
 
    
-    @OneToOne(()=>Order,(order)=>order.orderId)
-    @JoinColumn({name:'orderId'}) 
-    order:Order
+    @Column()
+    orderId: number;
     
+    @Column({ nullable: true })
+    paymentMethod: string;
 
 
 
